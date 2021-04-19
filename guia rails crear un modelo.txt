@@ -1,0 +1,116 @@
+rails s -p 3001 server
+
+bin/rails generate model Article title:string body:text
+database migrations are used to alter the structure of an application database written in ruby
+By default, the create_table method adds an id column as an auto-incrementing primary key. So the first record in the table will have an id of 1, the next record will have an id of 2, and so on.
+bin/rails db:migrate
+The command will display output indicating that the table was created:
+The console is an interactive coding environment just like irb, but it also automatically loads Rails and our application code.
+$ bin/rails console
+irb> article = Article.new(title: "Hello Rails", body: "I am on Rails!")
+article.save
+When we want to fetch this article from the database, we can call find on the model and pass the id as an argument:
+irb> Article.find(1)
+And when we want to fetch all articles from the database, we can call all on the model:
+irb> Article.all
+to view 
+in name_controller.rb 
+below indes we set var articles
+ @articles = Article.all
+in C:\myapp\app\views\articles index we set
+<h1>Articles</h1>
+
+<ul>
+  <% @articles.each do |article| %>
+    <li>
+      <%= article.title %>
+    </li>
+  <% end %>
+</ul>
+Showing a Single Article
+We start by adding a new route that maps to a new controller action (which we will add next). Open config/routes.rb, and insert the last route shown here:
+get "/articles", to: "articles#index"
+ get "/articles/:id", to: "articles#show"
+
+id. This designates a route parameter. A route parameter captures a segment of the request's path, and puts that value into the params Hash, which is accessible by the controller action. For example, when handling a request like GET http://localhost:3000/articles/1
+which would then be accessible as params[:id] in the show action of ArticlesController.
+
+in app/controllers/articles_controller.rb: we add de artciles def show
+
+class ArticlesController < ApplicationController
+  def index
+    @articles = Article.all
+  end
+
+  def show
+    @article = Article.find(params[:id])
+  end
+end
+
+we create show.html.erb
+and set like previous html
+we can add link from index with 
+ <a href="/articles/<%= article.id %>">
+way 1
+to my understanding
+way2
+config/routes.rb
+ resources :articles
+
+then in app/views/articles/index.html.erb
+we can use   <a href="<%= article_path(article) %>">
+instead of <a href="/articles/<%= article.id %>">
+and use the appropriate way <%= link_to article.title, article %>
+
+Now we move on to the "C" (Create) of CRUD
+First, the user requests a form to fill out. Then, the user submits the form. If there are no errors, then the resource is created and some kind of confirmation is displayed. Else, the form is redisplayed with error messages,
+ def new
+    @article = Article.new
+  end
+
+  def create
+    @article = Article.new(title: "...", body: "...")
+
+    if @article.save
+      redirect_to @article which takes you to articles/#{@article.id}"
+    else
+      render :new
+    end
+  end
+
+Let's create app/views/articles/new.html.erb with the following contents:
+
+<h1>New Article</h1>
+
+<%= form_with model: @article do |form| %>
+  <div>
+    <%= form.label :title %><br>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :body %><br>
+    <%= form.text_area :body %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+Strong parameter  Otherwise, a malicious user could potentially submit extra form fields and overwrite private data. In fact, if we pass the unfiltered params[:article] 
+
+Let's add a private method to the bottom of app/controllers/articles_controller.rb named article_params that filters params. And let's change create to use it:
+
+where we add 
+
+outside and lower part and edit
+
+  def create
+    @article = Article.new(article_params)
+
+  private
+    def article_params
+      params.require(:article).permit(:title, :body)
+    end
+end
