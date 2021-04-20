@@ -1,5 +1,20 @@
 <h1><%= @article.title %></h1>
 <h1><%= @article.author %></h1>
 
-<p><%= @article.body %></p>
+<p><%= @article.body %>
+	<%= link_to "index", root_path%>
+</p>
 
+<ul>
+  <li><%= link_to "Edit", edit_article_path(@article) %></li>
+   <li><%= link_to "Destroy", article_path(@article),
+   method: :delete,
+   data: { confirm: "Are you sure?" } %></li>
+</ul>
+
+<h2>Reviews</h2>
+<%= render @article.reviews %>
+
+
+<h2>Add a review:</h2>
+<%= render 'reviews/form' %>
