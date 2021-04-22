@@ -1,6 +1,12 @@
 class ArticlesController < ApplicationController
+  ARTICLES_PER_PAGE = 2
   def index
-  	@articles = Article.all
+    if((params.fetch(:page, 0).to_i)<0)
+     @page = 0.to_i
+   else
+     @page = params.fetch(:page, 0).to_i
+    end
+    @articles = Article.offset(@page*ARTICLES_PER_PAGE).limit(ARTICLES_PER_PAGE)
   end
   def show
     @article = Article.find(params[:id])
@@ -43,4 +49,5 @@ end
     def article_params
       params.require(:article).permit(:title, :body, :author)
     end
+
 end

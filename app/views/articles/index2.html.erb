@@ -1,0 +1,12 @@
+<h1>Articles2</h1>
+
+<div class="row">
+<%= render @articles %>
+</div>
+
+
+<div>
+<%= link_to "Next Page", articles_path(page: @page +1) %>
+I
+<%= link_to "Prev Page", articles_path(page: @page -1) %>
+</div>
