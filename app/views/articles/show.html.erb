@@ -1,9 +1,9 @@
-<%= link_to "index", root_path%>
+<%= link_to "HOME", root_path%>
 <h1>Title:<%= @article.title %></h1>
 <h2 id="auth">Author:<%= @article.author %></h2>
 
 <p id="text"><%= @article.body %></p>
-
+<%= image_tag("image.png") %>
 <div>
 <ul id= "editdist">
   <li><%= link_to "Edit", edit_article_path(@article) %></li>

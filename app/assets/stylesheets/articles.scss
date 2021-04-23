@@ -5,10 +5,12 @@
 h1 {
   font-size: 30px;
   text-align: center;
+  color: black;
 }
 
 body {
-background-color: #cccccc;
+background-image: url(background.jpg);
+background-size: cover;
 }
 
 #editdist {
@@ -19,7 +21,7 @@ background-color: #cccccc;
 
 #paddthis {
 	text-align: left;
-  	width: 148px;
+  	width: 180px;
 	padding: 1px;
 	border: 1px solid blue;
 }
@@ -29,7 +31,18 @@ background-color: #cccccc;
   text-align: center;
 }
 
-#text, #link {
+#text{
   font-size: 20px;
   text-align: center;
+}
+
+#link {
+  font-size: 20px;
+  text-align: center;
+  color: blue;
+}
+
+a:link { 
+  color: blue;
+  font-size: 20px;
 }
