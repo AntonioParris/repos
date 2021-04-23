@@ -1,11 +1,14 @@
 class ArticlesController < ApplicationController
   ARTICLES_PER_PAGE = 2
   def index
-    if((params.fetch(:page, 0).to_i)<0)
+    if((params.fetch(:page, 0).to_i)<0) #page wont go below -1 =0
      @page = 0.to_i
+   else if((params.fetch(:page, 0).to_i)>((Article.all.try(:length) || 0)/2)) #page wont go higer than max+1
+     @page = ((Article.all.try(:length) || 0).to_i)/2
    else
-     @page = params.fetch(:page, 0).to_i
+    @page = params.fetch(:page, 0).to_i
     end
+  end
     @articles = Article.offset(@page*ARTICLES_PER_PAGE).limit(ARTICLES_PER_PAGE)
   end
   def show

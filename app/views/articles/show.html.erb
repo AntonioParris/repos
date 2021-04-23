@@ -1,20 +1,21 @@
-<h1><%= @article.title %></h1>
-<h1><%= @article.author %></h1>
+<%= link_to "index", root_path%>
+<h1>Title:<%= @article.title %></h1>
+<h2 id="auth">Author:<%= @article.author %></h2>
 
-<p><%= @article.body %>
-	<%= link_to "index", root_path%>
-</p>
+<p id="text"><%= @article.body %></p>
 
-<ul>
+<div>
+<ul id= "editdist">
   <li><%= link_to "Edit", edit_article_path(@article) %></li>
-   <li><%= link_to "Destroy", article_path(@article),
+  <li><%= link_to "Destroy", article_path(@article),
    method: :delete,
    data: { confirm: "Are you sure?" } %></li>
 </ul>
+</div>
 
-<h2>Reviews</h2>
+<h2 id="revs">Reviews:</h2>
 <%= render @article.reviews %>
 
 
-<h2>Add a review:</h2>
+<h2 id="addrev">Add a review:</h2>
 <%= render 'reviews/form' %>

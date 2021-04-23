@@ -1,3 +1,35 @@
 // Place all the styles related to the Articles controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+h1 {
+  font-size: 30px;
+  text-align: center;
+}
+
+body {
+background-color: #cccccc;
+}
+
+#editdist {
+	text-align: left;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#paddthis {
+	text-align: left;
+  	width: 148px;
+	padding: 1px;
+	border: 1px solid blue;
+}
+
+#auth  {
+  font-size: 20px;
+  text-align: center;
+}
+
+#text, #link {
+  font-size: 20px;
+  text-align: center;
+}
